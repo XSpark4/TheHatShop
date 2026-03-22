@@ -1,0 +1,28 @@
+.tableContainer{
+    padding-left:  50px;
+    padding-right: 50px;
+}
+
+.tableContainer h2{
+    margin-left: 0px;
+}
+
+.tableContainer table{
+    width: 100%;
+    table-layout: fixed;
+    margin-top: 10px;
+    border-collapse: separate;
+    border-spacing: 0 10px;
+    background-color: #e4e4e486;
+}
+
+.tableContainer table tbody tr {
+    padding: 15px;
+    box-shadow: 0 2px 0 #00000079;
+}
+
+.tableContainer table th,
+.tableContainer table td {
+    padding: 10px;
+    text-align: left;
+}

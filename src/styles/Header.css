@@ -1,0 +1,25 @@
+body{
+    min-height: 100vh;
+    background-image: linear-gradient(to bottom, rgb(172, 144, 236), rgb(99, 64, 163));
+}
+
+header{
+    margin: 50px;
+    margin-top: 25px;
+    padding:10px;
+    background-color: #e4e4e486;
+}
+
+h1{
+    font-size: 60px;
+}
+
+h2{
+    font-size: 25px;
+    margin-left: 10px;
+}
+
+hr{
+    height: 5px;
+    background-color: black;
+}

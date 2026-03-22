@@ -1,3 +1,15 @@
+img
+{
+    background-color: #a17ac2;
+    border: 2px solid black;
+    width: 100px;
+    height: 100px;
+}
+
+th{
+    text-decoration: underline;
+}
+
 .tableContainer{
     padding-left:  50px;
     padding-right: 50px;

@@ -1,8 +1,12 @@
+import Header from '../components/Header'
+import ProductDescription from '../components/ProductDescription'
+
 function ProductDescriptionPage()
 {
     return(
         <>
-        Product Description Page
+            <Header/>
+            <ProductDescription/>
         </>
     )
 }

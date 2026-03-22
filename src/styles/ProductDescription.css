@@ -1,0 +1,32 @@
+.descriptionContainer
+{
+    padding-left:  50px;
+    padding-right: 50px;
+}
+
+.descriptionContainer table
+{
+    width: 100%;
+    table-layout: fixed;
+    margin-top: 10px;
+    border-collapse: separate;
+    border-spacing: 0 10px;
+    background-color: #e4e4e486;
+}
+
+.descriptionImage
+{
+    width: 200px;
+    height: 200px;
+    margin-left: 30px;
+    margin-top: 10px;
+}
+
+.descriptionContainer h2{
+    margin-left: 0px;
+    font-weight: 700;
+}
+
+.descriptionContainer h6{
+    font-style: italic;
+}

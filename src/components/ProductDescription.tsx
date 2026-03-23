@@ -3,6 +3,8 @@ import { supabase } from '../services/supaBaseClient';
 import { useNavigate } from 'react-router-dom'
 import { useParams } from 'react-router-dom'
 import { useEffect, useState } from 'react'
+import { useCart } from '../contexts/CartContext';
+import type { CartItem } from '../contexts/CartContext'
 
 function ProductDescription()
 {
@@ -17,6 +19,7 @@ function ProductDescription()
     }
 
     const navigate = useNavigate();
+    const { addToCart } = useCart();
     const { id } = useParams<{id: string}>();
     const [hat, setHat] = useState<Hat | null>(null);
     const [quantity, setQuantity] = useState(1);
@@ -55,8 +58,9 @@ function ProductDescription()
                             <td className="text-end">
                                 <input type="number" value={quantity} min={1} max={100} step={1} placeholder="Quantity" style={{width: "150px"}}   onChange={(e) => setQuantity(Number(e.target.value) || 1)}/>
                                 <button type="button" className="btn btn-primary me-4" style={{margin: "10px"}} onClick={() => {
-                                    console.log(`Adding ${quantity} of ${hat?.name} to cart`);
-                                    // TODO: Add cart logic here
+                                    console.log(`Adding ${quantity} of ${hat.id} to cart`);
+                                    const cartItem = {id: hat.id, qty: quantity};
+                                    addToCart(cartItem);
                                     }}>Add to Cart</button>
                             </td>
                         </tr>

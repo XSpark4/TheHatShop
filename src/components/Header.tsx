@@ -8,6 +8,7 @@ function Header()
     const navigate = useNavigate();
     const { user, setUser } = useUser();
     const showLoginButton = !user && useLocation().pathname !== "/login" && useLocation().pathname !== "/signup";
+    const showLogoutButtons = useLocation().pathname !== "/review-information";
 
     const handleLogout = () => {
         setUser(null);
@@ -22,9 +23,10 @@ function Header()
                         <button type="button" className="btn btn-primary" style={{width: "140px"}} onClick={() => {navigate("/login")}}>Login</button>
                     </div>
                 )}
-                {user && <div className="text-end">
+                {user && showLogoutButtons && <div className="text-end">
                     Welcome, {user.firstName}
                     <button type="button" className="btn btn-danger" style={{width: "140px", marginLeft: "15px"}} onClick={handleLogout}>Logout</button>
+                    <button type="button" className="btn btn-secondary" onClick={() => navigate("/review-information")} style={{width: "140px", marginLeft: "15px"}}>Review Information</button>
                 </div>}
                 <h1>The Hat Shop</h1>
             </div>

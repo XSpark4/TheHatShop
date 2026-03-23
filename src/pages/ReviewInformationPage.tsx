@@ -1,22 +1,18 @@
-import '../styles/SignupPage.css'
 import Header from '../components/Header'
 import Dropdown from '../components/Dropdown';
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import type { SyntheticEvent } from 'react';
 import { supabase } from '../services/supaBaseClient'
-import { useUser } from '../contexts/UserContext';
+import { useUser } from '../contexts/UserContext'
 
-function SignupPage()
-{
+function ReviewInformation(){
     const navigate = useNavigate();
-    const {setUser} = useUser();
+    const {user, setUser } = useUser();
+
     const [firstName, setFirstName] = useState("")
     const [lastName, setLastName] = useState("")
     const [phone, setPhone] = useState("")
-    const [email, setEmail] = useState("")
-    const [password, setPassword] = useState("")
-    const [confirmPassword, setConfirmPassword] = useState("")
     const [address, setAddress] = useState("")
     const [city, setCity] = useState("")
     const [zip, setZip] = useState("")
@@ -28,16 +24,32 @@ function SignupPage()
         "Ontario", "Prince Edward Island", "Quebec", "Saskatchewan", "Northwest Territories", "Nunavut", "Yukon"
     ];
 
+    useEffect(() => {
+        if (!user) {
+            alert("You must be logged in to review your account details")
+            navigate("/login");
+            return;
+        }
+        setFirstName(user.firstName || "");
+        setLastName(user.lastName || "");
+        setPhone(user.phone || "");
+        setAddress(user.address || "");
+        setCity(user.city || "");
+        setZip(user.zip || "");
+        setProvince(user.province || "");
+        setCardNumber(user.cardNumber || "");
+        setCardExpiry(user.cardExpiry || "");
+        setCardSecurityNumber(user.cardSecurityNumber || "");
+    }, [user, navigate]);
+
     const handleSubmit = async (e: SyntheticEvent<HTMLFormElement>) => {
         e.preventDefault();
         if(validateForm()) return;
 
-        const {data: newUser, error: message} = await supabase.from("User").insert([{
+        const {error: message} = await supabase.from("User").update([{
             firstName,
             lastName,
             phone,
-            email,
-            password,
             address,
             city,
             zip,
@@ -45,9 +57,7 @@ function SignupPage()
             cardNumber,
             cardExpiry,
             cardSecurityNumber
-        }]).select().single();
-
-        setUser(newUser);
+        }]).eq("id", user!.id);
 
         if(message)
         {
@@ -55,18 +65,28 @@ function SignupPage()
             return;
         }
 
-        alert("Account successfully created!");
+        setUser({
+            id: user!.id,
+            firstName,
+            lastName,
+            phone,
+            email: user!.email,
+            address,
+            city,
+            zip,
+            province,
+            cardNumber,
+            cardExpiry,
+            cardSecurityNumber,
+            })
+        alert("Account successfully updated!");
         navigate("/");
-        return;
     }
 
     const resetForm = () =>{
         setFirstName("");
         setLastName("");
         setPhone("");
-        setEmail("");
-        setPassword("");
-        setConfirmPassword("");
         setAddress("");
         setCity("");
         setZip("");
@@ -96,31 +116,6 @@ function SignupPage()
             alert("Phone number must be 10 digits");
             return "error";
         }        
-        if(!email)
-        {
-            alert("Email is missing");
-            return "error";
-        }
-        if(!email.includes('@'))
-        {
-            alert("Email is invalid");
-            return "error";
-        }
-        if(!password)
-        {
-            alert("Password is missing");
-            return "error";
-        }
-        if(!confirmPassword)
-        {
-            alert("Please confirm your password");
-            return "error";
-        }
-        if(password !== confirmPassword)
-        {
-            alert("Passwords do not match");
-            return "error";
-        }
         if(!address || !city || !zip)
         {
             alert("Shipping info is incomplete");
@@ -156,7 +151,7 @@ function SignupPage()
                 <button type="button" className="btn btn-secondary me-4" style={{marginLeft: "50px"}} onClick={() => navigate("/")}>Back to Catalog</button>
             </div><br></br><br></br>
             <form onSubmit={handleSubmit}>
-                <h2>Sign Up</h2>
+                <h2>Review your Account Information</h2>
                 <div className="signupContainer">
                     <div style={{padding: "15px"}}>
                         <h3>Contact Information:</h3>
@@ -166,11 +161,11 @@ function SignupPage()
                         </p>
                         <p>Phone Number:<br></br><input type="text" value={phone} placeholder="Phone Number" onChange={(e) => setPhone(e.target.value)}/>
                         </p>
-                        <p>Email:<br></br><input type="text" value={email} placeholder="Email" onChange={(e) => setEmail(e.target.value)}/>
+                        <p>Email:<br></br><input type="text"  placeholder="Email" disabled/>
                         </p>
-                        <p>Password:<br></br><input type="password" value={password} placeholder="Password" onChange={(e) => setPassword(e.target.value)}/>
+                        <p>Password:<br></br><input type="password" placeholder="Password" disabled/>
                         </p>
-                        <p>Confirm Password:<br></br><input type="password" value={confirmPassword} placeholder="Confirm Password" onChange={(e) => setConfirmPassword(e.target.value)}/>
+                        <p>Confirm Password:<br></br><input type="password" placeholder="Confirm Password" disabled/>
                         </p>
                         <hr></hr>
                         <h3>Shipping Information:</h3>
@@ -193,12 +188,12 @@ function SignupPage()
                     </div>
                 </div><br></br><br></br>
                 <div>
-                    <button type="submit" className="btn btn-success" style={{marginLeft: "50px", marginBottom: "100px"}} onSubmit={validateForm}>Create Account</button>
+                    <button type="submit" className="btn btn-success" style={{marginLeft: "50px", marginBottom: "100px"}} onSubmit={validateForm}>Update Account</button>
                     <button type="button" className="btn btn-danger" style={{marginLeft: "25px", marginBottom: "100px"}}  onClick={resetForm}>Clear Form</button>
                 </div>
             </form>
         </>
-    )
+    );
 }
 
-export default SignupPage;
+export default ReviewInformation;

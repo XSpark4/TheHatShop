@@ -54,10 +54,9 @@ function ProductDescription()
                             <td></td>
                             <td className="text-end">
                                 <input type="number" value={quantity} min={1} max={100} step={1} placeholder="Quantity" style={{width: "150px"}}   onChange={(e) => setQuantity(Number(e.target.value) || 1)}/>
-                                <button type="button" className="btn btn-primary me-4" 
-                                style={{margin: "10px"}} onClick={() => {
+                                <button type="button" className="btn btn-primary me-4" style={{margin: "10px"}} onClick={() => {
                                     console.log(`Adding ${quantity} of ${hat?.name} to cart`);
-                                    // TODO: Add your cart logic here
+                                    // TODO: Add cart logic here
                                     }}>Add to Cart</button>
                             </td>
                         </tr>

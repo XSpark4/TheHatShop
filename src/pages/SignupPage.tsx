@@ -29,7 +29,7 @@ function SignupPage()
     const handleSubmit = async (e: SyntheticEvent<HTMLFormElement>) => {
         e.preventDefault();
         if(validateForm()) return;
-        
+
         const {error: message} = await supabase.from("User").insert([{
             firstName,
             lastName,

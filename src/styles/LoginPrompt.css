@@ -1,0 +1,25 @@
+.centerContainer
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 30vh;
+}
+
+.loginTable {
+  padding: 40px;
+  background-color: #e4e4e486;
+  border-spacing: 10px;
+  text-align: center;
+}
+
+.loginTable td {
+  padding-top: 30px;
+  padding-bottom: 30px;
+  padding:20px;
+}
+
+input {
+  padding: 15px 30;
+  width: 200px;
+}

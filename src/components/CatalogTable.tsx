@@ -43,46 +43,48 @@ function CatalogTable() {
     }, [])
 
     return (
-        <div className='tableContainer'>
-            <h2>Browse our Catalog</h2>
-            <div className="d-flex gap-2 align-items-center">
-                <Dropdown text={selectedSort} options={filterOptions} onSelect={(value) => setSelectedSort(value)}/>
-                <Dropdown text={selectedDirection} options={sortingOptions} onSelect={(value) => setSelectedDirection(value)}/>
-                <button type="button" className="btn btn-primary" onClick={() =>
-                    fetchHats(selectedSort, selectedDirection === "Ascending")
-                }>
-                Apply Filter</button>
-            </div>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Image</th>
-                        <th>Name</th>
-                        <th>Brand</th>
-                        <th>Price</th>
-                        <th></th>
-                        <th></th>
-                        <th style={{textAlign: "right", paddingRight: "45px"}}>More Details</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {hats.map(hat => (
-                        <tr key={hat.id}>
-                            <td><img src={hat.image} alt={hat.name}/></td>
-                            <td>{hat.name}</td>
-                            <td>{hat.brand}</td>
-                            <td>${hat.price.toFixed(2)}</td>
-                            <td></td>
-                            <td></td>
-                            <td className="text-end">
-                                <button type="button" className="btn btn-primary me-4" onClick={() => clickHandler(hat.id, "View Details")}>View Details</button>
-                            </td>
+        <div>
+            <h2 style={{paddingLeft:"40px"}}>Browse our Catalog</h2>
+            <div className='tableContainer'>
+                <div className="d-flex gap-2 align-items-center">
+                    <Dropdown text={selectedSort} options={filterOptions} onSelect={(value) => setSelectedSort(value)}/>
+                    <Dropdown text={selectedDirection} options={sortingOptions} onSelect={(value) => setSelectedDirection(value)}/>
+                    <button type="button" className="btn btn-primary" onClick={() =>
+                        fetchHats(selectedSort, selectedDirection === "Ascending")
+                    }>
+                    Apply Filter</button>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Image</th>
+                            <th>Name</th>
+                            <th>Brand</th>
+                            <th>Price</th>
+                            <th></th>
+                            <th></th>
+                            <th style={{textAlign: "right", paddingRight: "45px"}}>More Details</th>
                         </tr>
-                    ))}
-                </tbody>
-            </table>
-            <br></br>
-            <br></br>
+                    </thead>
+                    <tbody>
+                        {hats.map(hat => (
+                            <tr key={hat.id}>
+                                <td><img src={hat.image} alt={hat.name}/></td>
+                                <td>{hat.name}</td>
+                                <td>{hat.brand}</td>
+                                <td>${hat.price.toFixed(2)}</td>
+                                <td></td>
+                                <td></td>
+                                <td className="text-end">
+                                    <button type="button" className="btn btn-primary me-4" onClick={() => clickHandler(hat.id, "View Details")}>View Details</button>
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+                <br></br>
+                <br></br>
+            </div>
         </div>
     )
 }

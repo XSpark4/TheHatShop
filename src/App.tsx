@@ -4,6 +4,7 @@ import LoginPage from './pages/LoginPage'
 import SignupPage from './pages/SignupPage'
 import ProductDescriptionPage from './pages/ProductDescriptionPage'
 import ReviewInformationPage from './pages/ReviewInformationPage'
+import CartPage from './pages/CartPage'
 
 function App()
 {
@@ -14,6 +15,7 @@ function App()
       <Route path="/signup" element={<SignupPage/>}/>
       <Route path="/review-information" element={<ReviewInformationPage/>}/>
       <Route path="/product/:id" element={<ProductDescriptionPage/>}/>
+      <Route path="/cart" element={<CartPage/>}/>
     </Routes>
   )
 }

@@ -1,0 +1,18 @@
+.cartContainer{
+    width: 94%;
+    padding: 15px;
+    background-color: #e4e4e486;
+}
+
+.cartContainer table{
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: separate;
+    border-spacing: 0 10px;
+}
+
+
+.cartContainer table tbody td {
+    padding-bottom: 15px;
+    box-shadow: 0 2px 0 #00000079;
+}

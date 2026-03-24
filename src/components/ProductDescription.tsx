@@ -59,8 +59,9 @@ function ProductDescription()
                                 <input type="number" value={quantity} min={1} max={100} step={1} placeholder="Quantity" style={{width: "150px"}}   onChange={(e) => setQuantity(Number(e.target.value) || 1)}/>
                                 <button type="button" className="btn btn-primary me-4" style={{margin: "10px"}} onClick={() => {
                                     console.log(`Adding ${quantity} of ${hat.id} to cart`);
-                                    const cartItem = {id: hat.id, qty: quantity};
+                                    const cartItem = {id: hat.id, name: hat.name, brand: hat.brand, price: hat.price, img: hat.image, qty: quantity};
                                     addToCart(cartItem);
+                                    navigate("/Cart");
                                     }}>Add to Cart</button>
                             </td>
                         </tr>

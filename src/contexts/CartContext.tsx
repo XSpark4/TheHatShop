@@ -3,6 +3,10 @@ import type { ReactNode } from 'react'
 
 export type CartItem = {
     id: number;
+    name: string;
+    brand: string;
+    price: number;
+    img: string;
     qty: number;
 }
 

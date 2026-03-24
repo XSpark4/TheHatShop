@@ -1,5 +1,3 @@
-import { useState } from "react"
-
 interface Props {
     options: string[];
     text: string;
@@ -7,23 +5,34 @@ interface Props {
 }
 
 function Dropdown({ options, text, onSelect }: Props) {
-    const [selected, setSelected] = useState(text);
     return (
         <div className="dropdown">
-            <button className="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                {selected}
+            <button
+                className="btn btn-secondary dropdown-toggle"
+                type="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+            >
+                {text} {/* controlled by parent */}
             </button>
             <ul className="dropdown-menu">
                 {options.map((option) => (
-                    <li key={option}><a className="dropdown-item" href="#" onClick={(e) => {
-                        e.preventDefault();
-                        setSelected(option);
-                        if (onSelect) onSelect(option);
-                    }}>{option}</a></li>
+                    <li key={option}>
+                        <a
+                            className="dropdown-item"
+                            href="#"
+                            onClick={(e) => {
+                                e.preventDefault();
+                                if (onSelect) onSelect(option); // tell parent about selection
+                            }}
+                        >
+                            {option}
+                        </a>
+                    </li>
                 ))}
             </ul>
         </div>
-    )
+    );
 }
 
 export default Dropdown;

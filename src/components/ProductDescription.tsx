@@ -48,7 +48,7 @@ function ProductDescription()
                                 <h6>{hat.brand}</h6><br></br>{hat.description}
                             </td>
                             <td className="text-end" style={{width: "25%", padding: "10px"}}>
-                                <h3>${hat.price}</h3>
+                                <h3>${hat.price.toFixed(2)}</h3>
                                 <h6>{hat.stock} in stock!</h6>
                             </td>
                         </tr>

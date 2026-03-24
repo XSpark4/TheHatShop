@@ -11,19 +11,19 @@ function SignupPage()
 {
     const navigate = useNavigate();
     const {setUser} = useUser();
-    const [firstName, setFirstName] = useState("")
-    const [lastName, setLastName] = useState("")
-    const [phone, setPhone] = useState("")
-    const [email, setEmail] = useState("")
-    const [password, setPassword] = useState("")
-    const [confirmPassword, setConfirmPassword] = useState("")
-    const [address, setAddress] = useState("")
-    const [city, setCity] = useState("")
-    const [zip, setZip] = useState("")
-    const [province, setProvince] = useState("Province")
-    const [cardNumber, setCardNumber] = useState("")
-    const [cardExpiry, setCardExpiry] = useState("")
-    const [cardSecurityNumber, setCardSecurityNumber] = useState("")
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
+    const [phone, setPhone] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
+    const [address, setAddress] = useState("");
+    const [city, setCity] = useState("");
+    const [zip, setZip] = useState("");
+    const [province, setProvince] = useState("Province");
+    const [cardNumber, setCardNumber] = useState("");
+    const [cardExpiry, setCardExpiry] = useState("");
+    const [cardSecurityNumber, setCardSecurityNumber] = useState("");
     let provinces = ["Alberta", "British Columbia", "Manitoba", "New Brunswick", "Newfoundland & Labrador", "Nova Scotia",
         "Ontario", "Prince Edward Island", "Quebec", "Saskatchewan", "Northwest Territories", "Nunavut", "Yukon"
     ];

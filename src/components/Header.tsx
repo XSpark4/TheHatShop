@@ -10,8 +10,8 @@ function Header()
     const { user, setUser } = useUser();
     const { clearCart } = useCart();
     const showLoginButton = !user && useLocation().pathname !== "/login" && useLocation().pathname !== "/signup";
-    const showLogoutButtons = useLocation().pathname !== "/review-information";
-    const showCartButtons = useLocation().pathname !== "/Cart" && useLocation().pathname !== "/checkout" && useLocation().pathname !== "/login" && useLocation().pathname !== "/signup";
+    const showLogoutButtons = useLocation().pathname !== "/review-information" && useLocation().pathname !== "/order-placed";
+    const showCartButtons = useLocation().pathname !== "/cart" && useLocation().pathname !== "/checkout" && useLocation().pathname !== "/login" && useLocation().pathname !== "/signup" && useLocation().pathname !== "/order-placed";
 
 
     const handleLogout = () => {

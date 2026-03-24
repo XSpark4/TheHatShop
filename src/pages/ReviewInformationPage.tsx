@@ -36,7 +36,7 @@ function ReviewInformation(){
         setAddress(user.address || "");
         setCity(user.city || "");
         setZip(user.zip || "");
-        setProvince(user.province || "");
+        setProvince(user.province || "Province");
         setCardNumber(user.cardNumber || "");
         setCardExpiry(user.cardExpiry || "");
         setCardSecurityNumber(user.cardSecurityNumber || "");
@@ -89,6 +89,7 @@ function ReviewInformation(){
         setPhone("");
         setAddress("");
         setCity("");
+        setProvince("Province");
         setZip("");
         setCardNumber("");
         setCardExpiry("");

@@ -1,0 +1,98 @@
+.adminLoginPage {
+    /* Shared admin workspace container for login and inventory editing. */
+    margin: 0 50px 100px 50px;
+    padding: 18px;
+    background-color: #e4e4e486;
+}
+
+.adminLoginHeader {
+    /* Top action row for locking admin access and returning home. */
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 18px;
+}
+
+.adminTabs {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+}
+
+.adminLoginGrid {
+    /* Stacks the inventory table and new-item form on the page. */
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+}
+
+.adminSplit {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 16px;
+}
+
+.adminPanelCard {
+    background: #ffffff88;
+    border: 1px solid #00000022;
+    padding: 12px;
+}
+
+.adminFilters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: center;
+}
+
+.adminFilters input {
+    padding: 6px 8px;
+}
+
+.adminInventoryTable {
+    /* Table used for editing stock and price inline. */
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.adminInventoryTable th,
+.adminInventoryTable td {
+    border-bottom: 1px solid #00000033;
+    padding: 8px;
+    vertical-align: top;
+}
+
+.adminInventoryForm {
+    /* Grid form for creating new catalog items. */
+    display: grid;
+    grid-template-columns: repeat(2, minmax(200px, 1fr));
+    gap: 12px;
+}
+
+.adminInventoryForm label {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.adminInventoryForm input,
+.adminInventoryForm textarea {
+    padding: 6px 8px;
+}
+
+@media (max-width: 900px) {
+    .adminLoginPage {
+        margin-left: 16px;
+        margin-right: 16px;
+    }
+
+    .adminInventoryForm {
+        grid-template-columns: 1fr;
+    }
+
+    .adminSplit {
+        grid-template-columns: 1fr;
+    }
+}

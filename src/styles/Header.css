@@ -23,3 +23,12 @@ hr{
     height: 5px;
     background-color: black;
 }
+
+.adminLoginButton {
+    /* Keeps the admin entry button fixed in the bottom-right corner. */
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    z-index: 1000;
+    width: 140px;
+}

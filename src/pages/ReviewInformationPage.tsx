@@ -6,9 +6,9 @@ import type { SyntheticEvent } from 'react';
 import { supabase } from '../services/supaBaseClient'
 import { useUser } from '../contexts/UserContext'
 
-function ReviewInformation(){
+function ReviewInformation() {
     const navigate = useNavigate();
-    const {user, setUser } = useUser();
+    const { user, setUser } = useUser();
 
     const [firstName, setFirstName] = useState("")
     const [lastName, setLastName] = useState("")
@@ -44,9 +44,9 @@ function ReviewInformation(){
 
     const handleSubmit = async (e: SyntheticEvent<HTMLFormElement>) => {
         e.preventDefault();
-        if(validateForm()) return;
+        if (validateForm()) return;
 
-        const {error: message} = await supabase.from("User").update([{
+        const { error: message } = await supabase.from("User").update([{
             firstName,
             lastName,
             phone,
@@ -59,8 +59,7 @@ function ReviewInformation(){
             cardSecurityNumber
         }]).eq("id", user!.id);
 
-        if(message)
-        {
+        if (message) {
             alert(message.message);
             return;
         }
@@ -78,12 +77,12 @@ function ReviewInformation(){
             cardNumber,
             cardExpiry,
             cardSecurityNumber,
-            })
+        })
         alert("Account successfully updated!");
         navigate("/");
     }
 
-    const resetForm = () =>{
+    const resetForm = () => {
         setFirstName("");
         setLastName("");
         setPhone("");
@@ -97,100 +96,91 @@ function ReviewInformation(){
     }
 
     const validateForm = (): string | null => {
-        if(!firstName)
-        {
+        if (!firstName) {
             alert("First name is missing");
             return "error";
         }
-        if(!lastName)
-        {
+        if (!lastName) {
             alert("Last name is missing");
             return "error";
         }
-        if(!phone)
-        {
+        if (!phone) {
             alert("Phone number is missing");
             return "error";
         }
-        if(!phone.match(/^\d{10}$/))
-        {
+        if (!phone.match(/^\d{10}$/)) {
             alert("Phone number must be 10 digits");
             return "error";
-        }        
-        if(!address || !city || !zip)
-        {
+        }
+        if (!address || !city || !zip) {
             alert("Shipping info is incomplete");
             return "error";
         }
-        if(province === "Province")
-        {
+        if (province === "Province") {
             alert("Please select a province");
             return "error";
         }
-        if(!cardNumber.match(/^\d{16}$/))
-        {
+        if (!cardNumber.match(/^\d{16}$/)) {
             alert("Card number must be 16 digits");
             return "error";
         }
-        if(!cardExpiry.match(/^\d{2}\/\d{2}$/))
-        {
+        if (!cardExpiry.match(/^\d{2}\/\d{2}$/)) {
             alert("Expiry format is MM/YY");
             return "error";
-        }   
-        if(!cardSecurityNumber.match(/^\d{3}$/))
-        {
+        }
+        if (!cardSecurityNumber.match(/^\d{3}$/)) {
             alert("Security code must be 3 digits");
             return "error";
         }
         return null;
     }
 
-    return(
+    return (
         <>
-            <Header/>
+            <Header />
             <div>
-                <button type="button" className="btn btn-secondary me-4" style={{marginLeft: "50px"}} onClick={() => navigate("/")}>Back to Catalog</button>
+                <button type="button" className="btn btn-secondary me-4" style={{ marginLeft: "50px" }} onClick={() => navigate("/")}>Back to Catalog</button>
             </div><br></br><br></br>
             <form onSubmit={handleSubmit}>
                 <h2>Review your Account Information</h2>
                 <div className="signupContainer">
-                    <div style={{padding: "15px"}}>
+                    <div style={{ padding: "15px" }}>
                         <h3>Contact Information:</h3>
-                        <p>First Name :<br></br><input type="text" value={firstName} placeholder="First Name" onChange={(e) => setFirstName(e.target.value)}/>
+                        <p>First Name :<br></br><input type="text" value={firstName} placeholder="First Name" onChange={(e) => setFirstName(e.target.value)} />
                         </p>
-                        <p>Last Name:<br></br><input type="text" value={lastName} placeholder="Last Name" onChange={(e) => setLastName(e.target.value)}/>
+                        <p>Last Name:<br></br><input type="text" value={lastName} placeholder="Last Name" onChange={(e) => setLastName(e.target.value)} />
                         </p>
-                        <p>Phone Number:<br></br><input type="text" value={phone} placeholder="Phone Number" onChange={(e) => setPhone(e.target.value)}/>
+                        <p>Phone Number:<br></br><input type="text" value={phone} placeholder="Phone Number" onChange={(e) => setPhone(e.target.value)} />
                         </p>
-                        <p>Email:<br></br><input type="text"  placeholder="Email" disabled/>
+                        <p>Email:<br></br><input type="text" placeholder="Email" disabled />
                         </p>
-                        <p>Password:<br></br><input type="password" placeholder="Password" disabled/>
+                        <p>Password:<br></br><input type="password" placeholder="Password" disabled />
                         </p>
-                        <p>Confirm Password:<br></br><input type="password" placeholder="Confirm Password" disabled/>
+                        <p>Confirm Password:<br></br><input type="password" placeholder="Confirm Password" disabled />
                         </p>
                         <hr></hr>
                         <h3>Shipping Information:</h3>
-                        <p>Address:<br></br><input type="text" value={address} placeholder="Address" onChange={(e) => setAddress(e.target.value)}/>
+                        <p>Address:<br></br><input type="text" value={address} placeholder="Address" onChange={(e) => setAddress(e.target.value)} />
                         </p>
-                        <p>City:<br></br><input type="text" value={city} placeholder="City" onChange={(e) => setCity(e.target.value)}/>
+                        <p>City:<br></br><input type="text" value={city} placeholder="City" onChange={(e) => setCity(e.target.value)} />
                         </p>
-                        <p>ZIP Code:<br></br><input type="text" value={zip} placeholder="ZIP Code" onChange={(e) => setZip(e.target.value)}/>
+                        <p>ZIP Code:<br></br><input type="text" value={zip} placeholder="ZIP Code" onChange={(e) => setZip(e.target.value)} />
                         </p>
-                        <div>Province:<Dropdown text={province} options={provinces} onSelect={(value) => setProvince(value)}/>
+                        <div>Province:<Dropdown text={province} options={provinces} onSelect={(value) => setProvince(value)} />
                         </div>
                         <hr></hr>
                         <h3>Billing Information</h3>
-                        <p>Card Number:<br></br><input type="text" value={cardNumber} placeholder="Card Number" onChange={(e) => setCardNumber(e.target.value)}/>
+                        <p>Card Number:<br></br><input type="text" value={cardNumber} placeholder="Card Number" onChange={(e) => setCardNumber(e.target.value)} />
                         </p>
-                        <p>Card Expiry Date (MM/YY):<br></br><input type="text" value={cardExpiry} placeholder="Card Expiry (MM/YY)" onChange={(e) => setCardExpiry(e.target.value)}/>
+                        <p>Card Expiry Date (MM/YY):<br></br><input type="text" value={cardExpiry} placeholder="Card Expiry (MM/YY)" onChange={(e) => setCardExpiry(e.target.value)} />
                         </p>
-                        <p>Security Code:<br></br><input type="text" value={cardSecurityNumber} placeholder="Security Code" onChange={(e) => setCardSecurityNumber(e.target.value)}/>
+                        <p>Security Code:<br></br><input type="text" value={cardSecurityNumber} placeholder="Security Code" onChange={(e) => setCardSecurityNumber(e.target.value)} />
                         </p>
                     </div>
                 </div><br></br><br></br>
                 <div>
-                    <button type="submit" className="btn btn-success" style={{marginLeft: "50px", marginBottom: "100px"}} onSubmit={validateForm}>Update Account</button>
-                    <button type="button" className="btn btn-danger" style={{marginLeft: "25px", marginBottom: "100px"}}  onClick={resetForm}>Clear Form</button>
+                    <button type="submit" className="btn btn-success" style={{ marginLeft: "50px", marginBottom: "100px" }} onSubmit={validateForm}>Update Account</button>
+                    <button type="button" className="btn btn-danger" style={{ marginLeft: "25px", marginBottom: "100px" }} onClick={resetForm}>Clear Form</button>
                 </div>
             </form>
         </>

@@ -7,7 +7,7 @@
 -- Sales order header table used by Admin Sales History view.
 CREATE TABLE IF NOT EXISTS "SalesOrders" (
     id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
-    user_id uuid REFERENCES "User" (id) ON DELETE SET NULL,
+    user_id integer REFERENCES "User" (id) ON DELETE SET NULL,
     subtotal numeric(10, 2) NOT NULL,
     tax numeric(10, 2) NOT NULL,
     total numeric(10, 2) NOT NULL,

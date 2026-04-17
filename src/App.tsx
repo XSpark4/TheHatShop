@@ -8,6 +8,7 @@ import CartPage from './pages/CartPage'
 import CheckoutPage from './pages/CheckoutPage'
 import OrderPage from './pages/OrderPage'
 import ScrollToTop from './components/ScrollToTop'
+import OrderHistoryPage from "./pages/OrderHistoryPage";
 // Dedicated page for entering the admin key and editing inventory.
 import AdminLoginPage from './pages/AdminLoginPage'
 
@@ -24,6 +25,7 @@ function App() {
         <Route path="/cart" element={<CartPage />} />
         <Route path="/checkout" element={<CheckoutPage />} />
         <Route path="/order-placed" element={<OrderPage />} />
+        <Route path="/order-history" element={<OrderHistoryPage />} />
         {/* Admin entry route opened from the bottom-right button in the header. */}
         <Route path="/admin-login" element={<AdminLoginPage />} />
       </Routes>

@@ -54,8 +54,8 @@ type SalesOrderItem = {
     line_total: number;
 };
 
-// Default key is only for local development; override with VITE_ADMIN_KEY in .env.
-const adminKey = import.meta.env.VITE_ADMIN_KEY || 'admin123';
+// Admin key must be provided via environment variable.
+const adminKey = import.meta.env.VITE_ADMIN_KEY;
 
 const emptyNewItem = {
     name: '',
@@ -197,6 +197,12 @@ function AdminLoginPage() {
 
     const handleUnlock = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
+
+        if (!adminKey) {
+            alert('Admin key is not configured. Set VITE_ADMIN_KEY in your environment.');
+            return;
+        }
+
         if (keyInput.trim() !== adminKey) {
             alert('Invalid admin key');
             return;
@@ -366,6 +372,11 @@ function AdminLoginPage() {
                     {/* Admin key prompt shown before inventory tools are available. */}
                     <h2>Admin Login</h2>
                     <p>Enter the admin key to open the inventory management screen.</p>
+                    {!adminKey && (
+                        <p style={{ color: '#b02a37', marginTop: '8px' }}>
+                            Admin access is not configured. Set <code>VITE_ADMIN_KEY</code> and rebuild.
+                        </p>
+                    )}
                     <form onSubmit={handleUnlock} className="adminLoginHeader">
                         <input
                             type="password"

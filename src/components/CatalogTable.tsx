@@ -20,6 +20,7 @@ function CatalogTable() {
     let filterOptions = ["Name", "Brand", "Price"]
     let sortingOptions = ["Ascending", "Descending"]
 
+    const [searchQuery, setSearchQuery] = useState('');
     const [selectedSort, setSelectedSort] = useState("Name");
     const [selectedDirection, setSelectedDirection] = useState("Ascending");
 
@@ -32,10 +33,17 @@ function CatalogTable() {
             {/*TODO*/}
         }
     }  
-    async function fetchHats(sortBy = "name", ascending = true) {
-        const { data, error } = await supabase.from('Products').select('*').order(sortBy.toLowerCase(), {ascending});
-        if (error) console.error(error)
-        else setHats(data)
+    async function fetchHats(sortBy = "name", ascending = true, search='') {
+        let query = supabase.from('Products').select('*');
+
+        if (search) {
+            query = query.ilike('name', `%${search}%`);
+        }
+
+        const { data, error } = await query.order(sortBy.toLowerCase(), { ascending });
+
+        if (error) console.error(error);
+        else setHats(data);
     }
 
     useEffect(() => {
@@ -49,8 +57,9 @@ function CatalogTable() {
                 <div className="d-flex gap-2 align-items-center">
                     <Dropdown text={selectedSort} options={filterOptions} onSelect={(value) => setSelectedSort(value)}/>
                     <Dropdown text={selectedDirection} options={sortingOptions} onSelect={(value) => setSelectedDirection(value)}/>
+                    <input type="text" placeholder="Search by name..." className="form-control" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} style={{ maxWidth: "250px" }}/>
                     <button type="button" className="btn btn-primary" onClick={() =>
-                        fetchHats(selectedSort, selectedDirection === "Ascending")
+                        fetchHats(selectedSort, selectedDirection === "Ascending", searchQuery)
                     }>
                     Apply Filter</button>
                 </div>
